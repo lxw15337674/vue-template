@@ -20,7 +20,7 @@ export async function get(url, data) {
 }
 export async function post(url, data) {
   try {
-    let res = await Axios.post(url, JSON.stringify(data));
+    let res = await Axios.post(url, data);
     res = res.data;
     return new Promise((resolve, reject) => {
       resolve(res.data);
