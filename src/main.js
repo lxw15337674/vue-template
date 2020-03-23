@@ -3,7 +3,7 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import directive from 'src/directive'; // 引入自定义指令
-import 'vant/lib/index.css';
+import './plugins/element.js'
 
 Vue.config.productionTip = false;
 
