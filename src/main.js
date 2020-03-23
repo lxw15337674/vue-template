@@ -6,10 +6,10 @@ import directive from 'src/directive'; // 引入自定义指令
 import './plugins/element.js'
 
 Vue.config.productionTip = false;
+Vue.use(directive);
 
 new Vue({
   router,
   store,
   render: (h) => h(App),
 }).$mount('#app');
-Vue.use(directive);
