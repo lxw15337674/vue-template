@@ -1,21 +1,24 @@
 <template>
   <div>
-    <div class="filter-content">
-      <div v-for="item in searchList" :key="item.key">
-        <label>{{ item.label }}</label>
-        <el-input
-          size="small"
-          class="search-input"
-          v-model="item.key"
-          :placeholder="`${item.label}查询`"
-        ></el-input>
-      </div>
-      <!--      <div class="fr">-->
-      <!--        <div class="rank">-->
-      <!--          -->
-      <!--        </div>-->
-      <!--      </div>-->
-    </div>
+    <!--    <div class="filter-content">-->
+    <!--      <div v-for="item in searchList" :key="item.key">-->
+    <!--        <label>{{ item.label }}</label>-->
+    <!--        <el-input-->
+    <!--          @input="(val) => searchInput(item.key, val)"-->
+    <!--          suffix-icon="el-icon-search"-->
+    <!--          size="small"-->
+    <!--          class="search-input"-->
+    <!--          clearable-->
+    <!--          maxlength="20"-->
+    <!--          :placeholder="`${item.label}查询`"-->
+    <!--        ></el-input>-->
+    <!--      </div>-->
+    <!--      <div class="fr">-->
+    <!--        <div class="rank">-->
+    <!--          -->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
     <el-table :data="tableData" style="width: 100%">
       <el-table-column
         v-for="col in tableCols"
@@ -27,13 +30,15 @@
       <slot></slot>
     </el-table>
     <el-pagination
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page="currentPage4"
-      :page-sizes="[100, 200, 300, 400]"
-      :page-size="100"
+      class="fr mt20 pagination"
+      background
+      :current-page="params.page"
+      :page-sizes="[5, 10, 20]"
+      :page-size="params.pageSize"
       layout="total, sizes, prev, pager, next, jumper"
-      :total="400"
+      :total="total"
+      @size-change="(val) => setParams('pageSize', val)"
+      @current-change="(val) => setParams('page', val)"
     >
     </el-pagination>
   </div>
@@ -43,6 +48,14 @@
 export default {
   name: 'app',
   props: {
+    setParams: {
+      required: true,
+      type: Function,
+    },
+    params: {
+      required: true,
+      type: Object,
+    },
     searchList: {
       type: Array,
       default: function() {
@@ -67,12 +80,11 @@ export default {
         return [];
       },
     },
+    total: {},
   },
-  // $attrs/$listeners
   data() {
     return {};
   },
-  methods: {},
 };
 </script>
 <style lang="stylus" scoped>
