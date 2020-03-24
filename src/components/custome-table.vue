@@ -1,25 +1,16 @@
 <template>
   <div>
-    <!--    <div class="filter-content">-->
-    <!--      <div v-for="item in searchList" :key="item.key">-->
-    <!--        <label>{{ item.label }}</label>-->
-    <!--        <el-input-->
-    <!--          @input="(val) => searchInput(item.key, val)"-->
-    <!--          suffix-icon="el-icon-search"-->
-    <!--          size="small"-->
-    <!--          class="search-input"-->
-    <!--          clearable-->
-    <!--          maxlength="20"-->
-    <!--          :placeholder="`${item.label}查询`"-->
-    <!--        ></el-input>-->
-    <!--      </div>-->
-    <!--      <div class="fr">-->
-    <!--        <div class="rank">-->
-    <!--          -->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--    </div>-->
-    <el-table :data="tableData" style="width: 100%">
+    <el-table
+      :data="tableData"
+      style="width: 100%"
+      v-on="$listeners"
+      v-bind="$attrs"
+    >
+      <el-table-column label="序号" width="80">
+        <template slot-scope="scope">
+          {{ scope.$index + (params.page - 1) * params.pageSize + 1 }}
+        </template>
+      </el-table-column>
       <el-table-column
         v-for="col in tableCols"
         :prop="col.prop"
@@ -30,8 +21,9 @@
       <slot></slot>
     </el-table>
     <el-pagination
-      class="fr mt20 pagination"
+      class=" mt20 pagination"
       background
+      align="right"
       :current-page="params.page"
       :page-sizes="[5, 10, 20]"
       :page-size="params.pageSize"
@@ -55,18 +47,6 @@ export default {
     params: {
       required: true,
       type: Object,
-    },
-    searchList: {
-      type: Array,
-      default: function() {
-        return [];
-      },
-    },
-    orderList: {
-      type: Array,
-      default: function() {
-        return [];
-      },
     },
     tableData: {
       type: Array,
