@@ -29,8 +29,8 @@
       :page-size="params.pageSize"
       layout="total, sizes, prev, pager, next, jumper"
       :total="total"
-      @size-change="(val) => setParams('pageSize', val)"
-      @current-change="(val) => setParams('page', val)"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
     >
     </el-pagination>
   </div>
@@ -39,14 +39,14 @@
 <script>
 export default {
   name: 'app',
+  model: {
+    prop: 'params',
+    event: 'changeValue',
+  },
   props: {
-    setParams: {
-      required: true,
-      type: Function,
-    },
     params: {
-      required: true,
       type: Object,
+      required: true,
     },
     tableData: {
       type: Array,
@@ -64,6 +64,22 @@ export default {
   },
   data() {
     return {};
+  },
+  watch: {
+    params: {
+      deep: true,
+      handler(val) {
+        this.$emit('changeValue', val);
+      },
+    },
+  },
+  methods: {
+    handleSizeChange(val) {
+      this.params.pageSize = val;
+    },
+    handleCurrentChange(val) {
+      this.params.page = val;
+    },
   },
 };
 </script>

@@ -6,8 +6,7 @@
       :tableCols="tableCols"
       :searchList="searchList"
       :orderList="orderList"
-      :params="params"
-      :set-params="setParams"
+      v-model="params"
     ></c-table>
   </div>
 </template>
@@ -61,10 +60,6 @@ export default {
         'https://117.159.24.209:30377/rc/catalog/dataCatalogSearch',
         this.params,
       );
-    },
-    setParams(key, value) {
-      this.params[key] = value;
-      this.getData();
     },
   },
 };
