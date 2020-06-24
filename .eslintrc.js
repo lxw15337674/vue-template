@@ -8,13 +8,11 @@ module.exports = {
   },
   parser: 'vue-eslint-parser',
   parserOptions: {
-    'parser': '@typescript-eslint/parser'
+    parser: 'babel-eslint',
   },
   extends: [
     '@vue/prettier',
-    'plugin:vue/essential',
-    'prettier/@typescript-eslint',
-    'plugin:@typescript-eslint/recommended'],
+    'plugin:vue/essential',],
   plugins: ['vue'],
   rules: {
     quotes: [2, 'single', 'avoid-escape'],

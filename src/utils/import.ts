@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable @typescript-eslint/no-var-requires */
-
 /**
  * 不同环境下执行不同的导入方式，用于vue-router组件导入。
  * - 在生产环境中才使用懒加载，加快首屏开启速度。
