@@ -1,7 +1,4 @@
-import {
-  get,
-  post
-} from './axios.js';
+import { get, post } from './axios/index.js';
 export default {
   install(Vue) {
     Vue.prototype.$get = get;

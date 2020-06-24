@@ -6,10 +6,15 @@ module.exports = {
     es6: true,
     commonjs: true,
   },
-  //vue推荐规则
-  // extends: ['plugin:vue/recommended', '@vue/prettier'],
-
-  extends: ['plugin:vue/essential', '@vue/prettier'],
+  parser: 'vue-eslint-parser',
+  parserOptions: {
+    'parser': '@typescript-eslint/parser'
+  },
+  extends: [
+    '@vue/prettier',
+    'plugin:vue/essential',
+    'prettier/@typescript-eslint',
+    'plugin:@typescript-eslint/recommended'],
   plugins: ['vue'],
   rules: {
     quotes: [2, 'single', 'avoid-escape'],
@@ -244,7 +249,5 @@ module.exports = {
     // 不允许在变量定义之前使用它们
     'no-use-before-define': 0,
   },
-  parserOptions: {
-    parser: 'babel-eslint',
-  },
+
 };

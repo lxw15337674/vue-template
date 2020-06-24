@@ -10,9 +10,7 @@ export default {
   data() {
     return {};
   },
-  created() {
-    this.getData();
-  },
+  created() {},
   methods: {},
 };
 </script>

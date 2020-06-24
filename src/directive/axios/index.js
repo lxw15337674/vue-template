@@ -1,5 +1,4 @@
 import axios from 'axios';
-import Vue from 'vue';
 
 const Axios = axios.create({
   baseURL: globals.serverUrl,
@@ -16,6 +15,7 @@ export async function get(url, data) {
     });
   } catch (err) {
     console.error('服务器错误', err);
+    reject(err);
   }
 }
 export async function post(url, data) {
@@ -27,5 +27,6 @@ export async function post(url, data) {
     });
   } catch (err) {
     console.error('服务器错误', err);
+    reject(err);
   }
 }
