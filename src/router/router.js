@@ -1,4 +1,4 @@
-const _import = require('src/utils/import.ts')._import(ENV);
+const _import = require('src/utils/import.ts')._import(process.env.NODE_ENV);
 
 export default [
     {

@@ -17,9 +17,6 @@ module.exports = {
 
   },
   configureWebpack: smp.wrap((config) => {
-    let definePlugin = new webpack.DefinePlugin({
-      ENV: JSON.stringify(process.env.NODE_ENV),
-    })
     let pro = {
       module: {
         rules: [
@@ -48,7 +45,6 @@ module.exports = {
       },
       plugins: [
 
-        definePlugin,
         // gzip
         new CompressionPlugin({
           filename: '[path].gz[query]',
@@ -104,7 +100,6 @@ module.exports = {
         ]
       },
       plugins: [
-        definePlugin
       ]
     }
 
