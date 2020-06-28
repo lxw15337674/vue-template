@@ -10,8 +10,8 @@
 - webpack
   - 配置 stylus 全局变量
   - 集成 ESlint、prettier
-  - 继承 typescript
-  - 继承速度分析
+  - 集成 typescript
+  - 集成速度分析
   - 生产环境
     - 暴露当前环境
     - 开启 gzip 压缩
