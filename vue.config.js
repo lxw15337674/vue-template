@@ -1,7 +1,7 @@
 const path = require('path');
-const webpack = require('webpack');
 const CompressionPlugin = require('compression-webpack-plugin');
-const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+const smp = new SpeedMeasurePlugin()
 
 module.exports = {
   //基本路径
@@ -17,14 +17,15 @@ module.exports = {
     config.resolve.alias.set('src', path.join(__dirname, 'src')).end();
     config.resolve.extensions.prepend('.ts').end();
   },
-  configureWebpack: (config) => {
-    console.log(config.resolve.extensions);
+  configureWebpack: smp.wrap((config) => {
     let pro = {
       module: {
         rules: [
           {
             test: /\.tsx?$/,
-            use: ['ts-loader'],
+            use: [
+              'ts-loader'
+            ],
             exclude: /node_modules/,
           },
           {
@@ -36,20 +37,20 @@ module.exports = {
                 options: {
                   mozjpeg: { progressive: true, quality: 65 },
                   optipng: { enabled: false },
-                  pngquant: { quality: [0.65, 0.9], speed: 4 },
-                  gifsicle: { interlaced: false },
+                  pngquant: { quality: [0.65, 0.90], speed: 4 },
+                  gifsicle: { interlaced: false }
                 },
               },
             ],
-          },
-        ],
+          }]
       },
       plugins: [
+
         // gzip
         new CompressionPlugin({
           filename: '[path].gz[query]',
           algorithm: 'gzip',
-          test: new RegExp('\\.(' + ['js', 'css'].join('|') + ')$'),
+          test: new RegExp('\\.(' + ['js', 'css'].join('|') + ')$',),
           threshold: 8192,
           minRatio: 0.8,
         }),
@@ -65,7 +66,7 @@ module.exports = {
               minSize: 0,
               priority: 1,
               reuseExistingChunk: true,
-              enforce: true,
+              enforce: true
             },
             vendors: {
               name: 'chunk-vendors',
@@ -73,7 +74,7 @@ module.exports = {
               chunks: 'initial',
               priority: 2,
               reuseExistingChunk: true,
-              enforce: true,
+              enforce: true
             },
             elementUI: {
               name: 'chunk-elementui',
@@ -81,33 +82,36 @@ module.exports = {
               chunks: 'all',
               priority: 3,
               reuseExistingChunk: true,
-              enforce: true,
+              enforce: true
             },
-          },
+          }
         },
       },
-    };
+    }
     let dev = {
       module: {
         rules: [
           {
             test: /\.tsx?$/,
-            use: ['ts-loader'],
+            use: [
+              'ts-loader'
+            ],
             exclude: /node_modules/,
           },
-        ],
+        ]
       },
-      plugins: [],
-    };
+      plugins: [
+      ]
+    }
 
     if (process.env.NODE_ENV === 'production') {
       // 为生产环境修改配置...process.env.NODE_ENV !== 'development'
-      return pro;
+      return pro
     } else {
       // 为开发环境修改配置...
-      return dev;
+      return dev
     }
-  },
+  }),
   css: {
     requireModuleExtension: true,
     sourceMap: false,
@@ -116,7 +120,7 @@ module.exports = {
   devServer: {
     // host: 'localhost',
     // host: "0.0.0.0",
-    port: 8888, // 端口号
+    port: 8001, // 端口号
     open: true,
     hotOnly: true, // 热更新
     compress: true,
